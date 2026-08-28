@@ -1,9 +1,8 @@
 `timescale 1ns/1ps
 module alu4_tb;
 
-    reg [3:0] a, b; 
+    reg [3:0] a, b, y; 
     reg [1:0] op;
-    reg [3:0] y;
 
     integer i;
 
