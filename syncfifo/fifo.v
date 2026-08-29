@@ -40,20 +40,20 @@ module fifo(
             if (w_en && !full) begin
                 mem[w_ptr] <= w_data;
                 w_ptr <= w_ptr + 1;
-                count <= count + 1;
+    
             end
 
             //read
             if (r_en && !empty) begin
                 r_data <= mem[r_ptr];
                 r_ptr <= r_ptr + 1;
-                count <= count - 1;
+                
             end 
 
             //update count
-            case
-
-
+            case ({w_en && !full, r_en && !empty})
+                2'b01: count <= count - 1; // read only
+                2'b10: count <= count + 1; //write only
             endcase
         end 
     end
