@@ -7,6 +7,19 @@ module fifo(
 );
 
     reg [7:0] mem [0:4];
+    /* 
+    memory
+            ┌───────┐
+    index 0 │ A(8'b)│ ← read_ptr
+            ├───────┤
+    index 1 │ B     │
+            ├───────┤
+    index 2 │ C     │
+            ├───────┤
+    index 3 │       │ ← write_ptr
+            └───────┘
+    */
+
     reg [1:0] w_ptr;
     reg [1:0] r_ptr;
     reg [2:0] count; //count must represent 0...4 (5 values), so we need more bits as 2 bits only allow us to represent 4 values.
@@ -27,13 +40,21 @@ module fifo(
             if (w_en && !full) begin
                 mem[w_ptr] <= w_data;
                 w_ptr <= w_ptr + 1;
+                count <= count + 1;
             end
 
             //read
             if (r_en && !empty) begin
                 r_data <= mem[r_ptr];
                 r_ptr <= r_ptr + 1;
+                count <= count - 1;
             end 
-        end
+
+            //update count
+            case
+
+
+            endcase
+        end 
     end
 endmodule
