@@ -47,13 +47,13 @@ module fifo(
             if (r_en && !empty) begin
                 r_data <= mem[r_ptr];
                 r_ptr <= r_ptr + 1;
-                
             end 
 
             //update count
             case ({w_en && !full, r_en && !empty})
                 2'b01: count <= count - 1; // read only
-                2'b10: count <= count + 1; //write only
+                2'b10: count <= count + 1; // write only
+                default: count <= count; //both write & read 
             endcase
         end 
     end
