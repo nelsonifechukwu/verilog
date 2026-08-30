@@ -34,13 +34,26 @@ module uart_tx_simple (
         end else begin
 
             case (state)
+                
 
                 START: begin
-                    tx <= 1'b0;
+                    tx <= 1'b0; //pull tx low
                     if (tick) 
-                        state<= DATA;
+                        state <= DATA;
                 end
-                
+
+                DATA: begin
+                    tx <= shift_reg[0]; //send lsb
+                    
+                    if (tick) begin
+                        shift_reg <= shift_reg >> 1; //shift data so next lsb can be selected.
+                        if (bit_count == 7) //check to send all 8bits
+                            state <= STOP;
+                        else 
+                            bit_count = bit_count + 1;    
+                    end
+                end
+
                 STOP: begin
                     tx <= 1b'1; //pull tx high
                     if(tick) begin
