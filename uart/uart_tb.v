@@ -15,7 +15,7 @@ module uart_tb;
     );
 
     always #5 clk = ~clk;
-    always #5 tick = ~tick;
+    always #5 tick = ~tick; //clk period = 1 UART bit perios
 
     initial begin
         data = 8'b11001101;
