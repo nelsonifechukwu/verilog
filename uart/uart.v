@@ -44,6 +44,7 @@ module uart_tx_simple (
     
                         busy <= 1'b1; //tx line is busy
                         state <= START;
+                    end
                 end
 
                 START: begin
@@ -65,13 +66,14 @@ module uart_tx_simple (
                 end
 
                 STOP: begin
-                    tx <= 1b'1; //pull tx high
+                    tx <= 1'b1; //pull tx high
                     if(tick) begin
-                        state <= IDLE; //reset state to UDLE
+                        state <= IDLE; //reset state to IDLE
                         busy <= 1'b0; //tx line is no longer busy
                     end
                 end
-
-            endcase 
+        endcase 
+        end
+    end
 
 endmodule
