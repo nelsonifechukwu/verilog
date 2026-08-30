@@ -39,7 +39,7 @@ module uart_tx_simple (
                     tx <= 1'b1; //tx remains high
                     busy <= 1'b0; //not yet busy
                     if (start) begin
-                        shift_reg <= data;
+                        shift_reg <= data; //this is done here cause this is where the UART receives a transmission request and then immediately holds the data it will transmit.
                         bit_count = 0;
     
                         busy <= 1'b1; //tx line is busy
