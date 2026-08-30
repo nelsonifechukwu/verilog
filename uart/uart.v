@@ -35,6 +35,11 @@ module uart_tx_simple (
 
             case (state)
 
+                START: begin
+                    tx <= 1'b0;
+                    if (tick) 
+                        state<= DATA;
+                end
                 
                 STOP: begin
                     tx <= 1b'1; //pull tx high
