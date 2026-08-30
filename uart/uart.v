@@ -35,6 +35,16 @@ module uart_tx_simple (
 
             case (state)
                 
+                IDLE: begin
+                    tx <= 1'b1; //tx remains high
+                    busy <= 1'b0; //not yet busy
+                    if (start) begin
+                        shift_reg <= data;
+                        bit_count = 0;
+    
+                        busy <= 1'b1; //tx line is busy
+                        state <= START;
+                end
 
                 START: begin
                     tx <= 1'b0; //pull tx low
