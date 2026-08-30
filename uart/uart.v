@@ -21,9 +21,9 @@ module uart_tx_simple (
     parameter DATA  = 2'b10;
     parameter STOP  = 2'b11;
 
-
+    
     always @(posedge clk) begin
-
+     
         if (reset) begin
 
             state     <= IDLE;

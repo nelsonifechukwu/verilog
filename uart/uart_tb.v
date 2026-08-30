@@ -18,13 +18,20 @@ module uart_tb;
     always #5 tick = ~tick;
 
     initial begin
-        data = 8'b10001001;
+        data = 8'b11001101;
         start = 1;
-        reset = 0;
+        reset = 1;
         clk = 0;
         tick = 0;
 
-        $display("DATA: %b", tx);
+        @(negedge clk); 
+        reset = 0;
+
+        repeat (12) begin
+            @(posedge clk); 
+            $display("DATA: %b", tx);
+        end
+    $finish;
     end
 
 
