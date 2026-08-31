@@ -21,18 +21,18 @@ module alu4_tb;
             op = i[1:0];
             
             #1
-            if ((op == 2'b00) && (y !== (a + b))) begin
+            if ((op == 2'b00) && (y !== (a + b))) 
                 $display("FAIL: op=%b", op);
-            end
-            if ((op == 2'b01) && (y !== (a - b))) begin
+            
+            if ((op == 2'b01) && (y !== (a - b))) 
                 $display("FAIL: op=%b", op);
-            end
-            if ((op == 2'b10) && (y !== (a & b))) begin
+            
+            if ((op == 2'b10) && (y !== (a & b))) 
                 $display("FAIL: op=%b", op);
-            end
-            if ((op == 2'b11) && (y !== (a | b))) begin
+            
+            if ((op == 2'b11) && (y !== (a | b))) 
                 $display("FAIL: op=%b", op);
-            end   
+       
         end
         $finish;
     end
